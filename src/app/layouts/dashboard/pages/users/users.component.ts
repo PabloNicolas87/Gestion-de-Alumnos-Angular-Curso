@@ -12,7 +12,7 @@ import { UserDialogComponent } from './components/user-dialog/user-dialog.compon
 
 
 export class UsersComponent {
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'createdat'];
+  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'createdat', 'role', 'actions'];
 
   users: Usuario[] = [
     {
@@ -20,27 +20,41 @@ export class UsersComponent {
       firstname: 'Pablo',
       lastname: 'Girone',
       email: 'pablo1@gmail.com',
-      createdat: new Date()
+      createdat: new Date(),
+      role: 'ADMIN'
     },
     {
       id: 2,
       firstname: 'Nicolás',
       lastname: 'Girone',
       email: 'nicolas1@gmail.com',
-      createdat: new Date()
+      createdat: new Date(),
+      role: 'USER'
     },
   ]
 
   constructor (private matDialog: MatDialog) {}
 
-  openDialog(): void {
-    this.matDialog.open(UserDialogComponent).afterClosed().subscribe({
+  openDialog(editingUser?: Usuario): void {
+    this.matDialog.open(UserDialogComponent, {
+      data: editingUser,
+    }).afterClosed().subscribe({
       next: (resultado) => {
         if (resultado) {
-          this.users = [...this.users, resultado]
+          if(editingUser) {
+            this.users = this.users.map( (u) => u.id === editingUser.id ? {...u, ...resultado} : u )
+          } else {
+            resultado.id = new Date().getTime();
+            resultado.createdat = new Date();
+            this.users = [...this.users, resultado]
+          }
         }
       },
       
     });
+  }
+
+  onDeleteUser(id: number): void {
+    this.users = this.users.filter((u) => u.id != id)
   }
 }

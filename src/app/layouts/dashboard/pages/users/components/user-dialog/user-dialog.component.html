@@ -16,10 +16,19 @@
                 <input formControlName="lastname" matInput type="text" />
             </mat-form-field>    
         </div>
-        <div class="col-12 py-2">
+        <div class="col-8 py-2">
             <mat-form-field class="w-100" appearance="outline">
                 <mat-label>Email</mat-label>
                 <input formControlName="email" matInput type="text" />
+            </mat-form-field> 
+        </div>
+        <div class="col-4 py-2">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Rol de Usuario</mat-label>
+                <mat-select formControlName="role">
+                    <mat-option value="ADMIN">ADMIN</mat-option>
+                    <mat-option value="USER">USER</mat-option>
+                </mat-select>
             </mat-form-field> 
         </div>
     </div>    
