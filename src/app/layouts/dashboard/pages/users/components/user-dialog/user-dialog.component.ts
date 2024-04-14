@@ -6,33 +6,36 @@ import { Usuario } from '../../models';
 @Component({
   selector: 'app-user-dialog',
   templateUrl: './user-dialog.component.html',
-  styleUrl: './user-dialog.component.scss'
+  styleUrls: ['./user-dialog.component.scss']
 })
-
 export class UserDialogComponent {
-  userForm: FormGroup;
+  formGroup: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,  
+    private formBuilder: FormBuilder,
     private matDialogRef: MatDialogRef<UserDialogComponent>,
-    @Inject( MAT_DIALOG_DATA ) private editingUser?: Usuario
-  ){
-    this.userForm = this.formBuilder.group({
+    @Inject(MAT_DIALOG_DATA) private editingUser?: Usuario
+  ) {
+    this.formGroup = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', Validators.required],
-      role: ['USER', Validators.required],
+      birth: ['', Validators.required],
     });
+
     if (editingUser) {
-      this.userForm.patchValue(editingUser)
+      this.formGroup.patchValue(editingUser);
     }
   }
 
   onSubmit(): void {
-    if (this.userForm.invalid) {
-      this.userForm.markAllAsTouched();
-    } else {
-      this.matDialogRef.close(this.userForm.value);
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      return;
     }
+
+    const formData = this.formGroup.value;
+
+    this.matDialogRef.close(formData);
   }
 }

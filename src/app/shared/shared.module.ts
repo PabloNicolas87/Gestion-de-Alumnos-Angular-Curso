@@ -8,6 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 
 
@@ -25,7 +29,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule,
+    MatDatepickerModule, 
+    MatMomentDateModule
   ]
 })
 export class SharedModule { }

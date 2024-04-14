@@ -2,7 +2,6 @@ export interface Usuario {
     id: number;
     firstname: string;
     lastname: string;
-    createdat: Date;
+    birth: Date;
     email: string;
-    role: 'ADMIN' | 'USER';
 }

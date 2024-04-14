@@ -1,43 +1,68 @@
-<h2 mat-dialog-title>Crear Usuario</h2>
-
-<mat-dialog-content>
-<form [formGroup]="userForm">
-    <div class="row py-2">
-        <div class="col-6 py-2">
+<form [formGroup]="formGroup">
+    <mat-vertical-stepper linear>
+      <mat-step>
+        <ng-template matStepLabel>Nombre y Apellido</ng-template>
+        <div class="row py-2">
+          <div class="col-6 py-2">
             <mat-form-field class="w-100" appearance="outline">
-                <mat-label>Nombre</mat-label>
-                <input formControlName="firstname" matInput type="text" />
-                <mat-hint>El nombre debe tener mas de 6 caracteres</mat-hint>
-            </mat-form-field>    
-        </div>
-        <div class="col-6 py-2">
+              <mat-label>Nombre</mat-label>
+              <input title="nombre" placeholder="Ingresa el nombre" formControlName="firstname" matInput type="text" />
+            </mat-form-field>
+          </div>
+          <div class="col-6 py-2">
             <mat-form-field class="w-100" appearance="outline">
-                <mat-label>Apellido</mat-label>
-                <input formControlName="lastname" matInput type="text" />
-            </mat-form-field>    
+              <mat-label>Apellido</mat-label>
+              <input title="apellido" placeholder="Ingresa el apellido" formControlName="lastname" matInput type="text" />
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col-8 py-2">
+        <div>
+          <button type="button" mat-button matStepperNext [disabled]="formGroup.get('firstname')?.invalid || formGroup.get('lastname')?.invalid">Siguiente</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Email</ng-template>
+        <div class="row py-2">
+          <div class="col-12 py-2">
             <mat-form-field class="w-100" appearance="outline">
-                <mat-label>Email</mat-label>
-                <input formControlName="email" matInput type="text" />
-            </mat-form-field> 
+              <input title="email" placeholder="Ingresa el email" formControlName="email" matInput type="text" />
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col-4 py-2">
+        <div>
+          <button type="button" mat-button matStepperPrevious>Anterior</button>
+          <button type="button" mat-button matStepperNext [disabled]="formGroup.get('email')?.invalid">Siguiente</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Fecha de Nacimiento</ng-template>
+        <div class="row py-2">
+          <div class="col-12 py-2">
             <mat-form-field class="w-100" appearance="outline">
-                <mat-label>Rol de Usuario</mat-label>
-                <mat-select formControlName="role">
-                    <mat-option value="ADMIN">ADMIN</mat-option>
-                    <mat-option value="USER">USER</mat-option>
-                </mat-select>
-            </mat-form-field> 
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input title="Fecha de Nacimiento" placeholder="Ingresa el nacimiento" matInput [matDatepicker]="picker" formControlName="birth">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
         </div>
-    </div>    
-</form>
-
-</mat-dialog-content>    
-
-<mat-dialog-actions class="d-flex justify-content-end">
-  <button mat-button (click)="onSubmit()" >Guardar</button>
-  <button mat-button mat-dialog-close >Cancelar</button>
-</mat-dialog-actions>
-
+        <div>
+          <button type="button" mat-button matStepperPrevious>Anterior</button>
+          <button type="button" mat-button matStepperNext [disabled]="formGroup.get('birth')?.invalid">Siguiente</button>
+        </div>
+      </mat-step>
+      
+  
+      <mat-step>
+        <ng-template matStepLabel>Confirmar</ng-template>
+        <p>Por favor, revisa la información antes de guardar.</p>
+        <div>
+          <button type="button" mat-button matStepperPrevious>Anterior</button>
+          <button type="button" mat-button (click)="onSubmit()" [disabled]="formGroup.get('firstname')?.invalid || formGroup.get('lastname')?.invalid || formGroup.get('email')?.invalid || formGroup.get('role')?.invalid">Guardar</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+  
