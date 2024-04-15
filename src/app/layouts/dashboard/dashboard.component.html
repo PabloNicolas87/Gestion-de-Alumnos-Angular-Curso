@@ -1,13 +1,34 @@
 <mat-drawer-container class="example-container" autosize>
     <!--Sidebar-->
     <mat-drawer  [opened]="isMobile() ? 'false' : 'true'" #drawer class="example-sidenav" [mode]="isMobile() ? 'over' : 'side'">
-      <p>Auto-resizing sidenav</p>
-      @if (showFiller) {
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
-      }
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Toggle extra text
-      </button>
+      <div class="sidenav-header d-flex justify-content-center align-items-center">
+        <button (click)="showFiller = !showFiller" mat-icon-button color="primary">
+          <mat-icon>menu_open</mat-icon>
+        </button>  
+      </div>
+      <hr class="m-0 mx-3">
+      <div class="sidenav-body p-3">
+        <div class="sidenav-item d-flex flex-row align-items-center py-1">
+          <button mat-button>
+            <mat-icon color="primary">person</mat-icon>
+            @if (showFiller) {
+              <span class="ms-2 user-text">Usuarios</span>
+            }
+          </button> 
+        </div>
+        <div class="sidenav-item d-flex flex-row align-items-center py-1">
+          <button mat-button>
+            <mat-icon color="primary">school</mat-icon>
+            @if (showFiller) {
+              <span class="ms-2 user-text">Cursos</span>
+            }
+          </button>
+        </div>
+      </div>
+      
+
+      
+
     </mat-drawer>
     <!--End Sidebar-->
 
@@ -25,7 +46,7 @@
                 <mat-icon>menu</mat-icon>
               </button>
           
-            <span>My Application</span>
+            <span>Gestión de Alumnos</span>
         </mat-toolbar>
         <!--End Toolbar-->
         <app-users />
