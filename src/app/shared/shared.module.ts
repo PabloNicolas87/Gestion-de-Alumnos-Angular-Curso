@@ -12,6 +12,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { FullNamePipe } from './pipes/full-name.pipe';
+import { TituloGrandeDirective } from './directives/titulo-grande.directive';
 
 
 
@@ -19,7 +20,8 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 
 @NgModule({
   declarations: [
-    FullNamePipe
+    FullNamePipe,
+    TituloGrandeDirective
   ],
   imports: [
     CommonModule
