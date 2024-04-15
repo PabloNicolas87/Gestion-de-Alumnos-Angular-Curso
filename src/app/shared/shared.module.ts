@@ -38,7 +38,8 @@ import { TituloGrandeDirective } from './directives/titulo-grande.directive';
     MatStepperModule,
     MatDatepickerModule, 
     MatMomentDateModule,
-    FullNamePipe
+    FullNamePipe,
+    TituloGrandeDirective
   ]
 })
 export class SharedModule { }
