@@ -19,7 +19,7 @@ export class UserDialogComponent {
     this.formGroup = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['',[Validators.email, Validators.required]],
       birth: ['', Validators.required],
     });
 

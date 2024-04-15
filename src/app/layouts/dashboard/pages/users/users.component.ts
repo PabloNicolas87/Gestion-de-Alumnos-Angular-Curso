@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 
 
 export class UsersComponent {
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'birth', 'actions'];
+  displayedColumns: string[] = ['id', 'fullName' , 'email', 'birth', 'actions'];
 
   users: Usuario[] = [
     {
@@ -73,19 +73,18 @@ export class UsersComponent {
 
 onDeleteUser(id: number): void {
   Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
+    title: 'Estás seguro que quieres borrar el usuario?',
+    text: "Esta opción es definitiva",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonText: 'Si, borrar usuario!'
   }).then((result) => {
     if (result.isConfirmed) {
       this.users = this.users.filter((u) => u.id != id);
       Swal.fire(
-        'Deleted!',
-        'Your file has been deleted.',
+        'El usuario ha sido borrado.',
         'success'
       );
     }

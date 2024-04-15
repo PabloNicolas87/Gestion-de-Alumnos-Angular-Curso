@@ -11,13 +11,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { FullNamePipe } from './pipes/full-name.pipe';
 
 
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    FullNamePipe
+  ],
   imports: [
     CommonModule
   ],
@@ -32,7 +35,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatIconModule,
     MatStepperModule,
     MatDatepickerModule, 
-    MatMomentDateModule
+    MatMomentDateModule,
+    FullNamePipe
   ]
 })
 export class SharedModule { }

@@ -1,4 +1,9 @@
 <form [formGroup]="formGroup">
+    <mat-dialog-actions class="d-flex justify-content-end">
+      <button type="button" mat-icon-button mat-dialog-close color="warn">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-dialog-actions>
     <mat-vertical-stepper linear>
       <mat-step>
         <ng-template matStepLabel>Nombre y Apellido</ng-template>
@@ -7,6 +12,7 @@
             <mat-form-field class="w-100" appearance="outline">
               <mat-label>Nombre</mat-label>
               <input title="nombre" placeholder="Ingresa el nombre" formControlName="firstname" matInput type="text" />
+              
             </mat-form-field>
           </div>
           <div class="col-6 py-2">
