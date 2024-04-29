@@ -1,38 +1,37 @@
-import { Component } from '@angular/core';
-import { Usuario } from './models/index';
+import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../../../../core/models/index';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
+import { UsersService } from '../../../../core/services/user-service.service';
 import Swal from 'sweetalert2';
 
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  styleUrls: ['./users.component.scss']
 })
-
-
-export class UsersComponent {
+export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'fullName' , 'email', 'birth', 'actions'];
 
-  users: Usuario[] = [
-    {
-      id: 1,
-      firstname: 'Pablo',
-      lastname: 'Girone',
-      email: 'pablo1@gmail.com',
-      birth: new Date('12/8/1988')
-    },
-    {
-      id: 2,
-      firstname: 'Nicolás',
-      lastname: 'Girone',
-      email: 'nicolas1@gmail.com',
-      birth: new Date('02/12/1998')
-    },
-  ]
+  loading = true;
 
-  constructor (private matDialog: MatDialog) {}
+  users: Usuario[] = [];
+
+  constructor(private matDialog: MatDialog, private userService: UsersService) {}
+
+  ngOnInit(): void {
+    this.loading = true;
+    this.userService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+      },
+      error: (err) => {},
+      complete: () => {
+        this.loading = false;
+      }
+    })
+  }
 
   openDialog(editingUser?: Usuario): void {
     const dialogRef = this.matDialog.open(UserDialogComponent, {
