@@ -8,39 +8,32 @@
       </div>
       <hr class="m-0 mx-3">
       <div class="sidenav-body p-3">
-        <div class="sidenav-item d-flex flex-row align-items-center py-1">
-          <button mat-button>
+        <mat-nav-list>
+          <a routerLink="home" mat-list-item class="d-flex flex-row align-items-center py-1">
             <mat-icon color="primary">home</mat-icon>
             @if (showFiller) {
               <span class="ms-2 user-text">Inicio</span>
             }
-          </button>
-        </div>
-        <div class="sidenav-item d-flex flex-row align-items-center py-1">
-          <button mat-button>
+          </a>
+          <a routerLink="users" mat-list-item class="d-flex flex-row align-items-center py-1">
             <mat-icon color="primary">person</mat-icon>
             @if (showFiller) {
               <span class="ms-2 user-text">Usuarios</span>
             }
-          </button> 
-        </div>
-        <div class="sidenav-item d-flex flex-row align-items-center py-1">
-          <button mat-button>
+          </a> 
+          <a routerLink="courses" mat-list-item class="d-flex flex-row align-items-center py-1">
             <mat-icon color="primary">school</mat-icon>
             @if (showFiller) {
               <span class="ms-2 user-text">Cursos</span>
             }
-          </button>
-        </div>
-        <div class="sidenav-item d-flex flex-row align-items-center py-1">
-          <button mat-button>
+          </a>
+          <a routerLink="classes" mat-list-item class="d-flex flex-row align-items-center py-1">
             <mat-icon color="primary">workspaces</mat-icon>
             @if (showFiller) {
               <span class="ms-2 user-text">Classes</span>
             }
-          </button>
-        </div>
-        
+          </a>
+        </mat-nav-list>
       </div>
       
 

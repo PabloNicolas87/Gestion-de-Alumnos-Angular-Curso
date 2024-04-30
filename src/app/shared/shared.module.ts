@@ -18,6 +18,7 @@ import { TituloGrandeDirective } from './directives/titulo-grande.directive';
 
 
 
+
 @NgModule({
   declarations: [
     FullNamePipe,
