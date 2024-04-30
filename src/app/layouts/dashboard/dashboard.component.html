@@ -3,11 +3,19 @@
     <mat-drawer  [opened]="isMobile() ? 'false' : 'true'" #drawer class="example-sidenav" [mode]="isMobile() ? 'over' : 'side'">
       <div class="sidenav-header d-flex justify-content-center align-items-center">
         <button (click)="showFiller = !showFiller" mat-icon-button color="primary">
-          <mat-icon>menu_open</mat-icon>
+          <mat-icon>sync_alt</mat-icon>
         </button>  
       </div>
       <hr class="m-0 mx-3">
       <div class="sidenav-body p-3">
+        <div class="sidenav-item d-flex flex-row align-items-center py-1">
+          <button mat-button>
+            <mat-icon color="primary">home</mat-icon>
+            @if (showFiller) {
+              <span class="ms-2 user-text">Inicio</span>
+            }
+          </button>
+        </div>
         <div class="sidenav-item d-flex flex-row align-items-center py-1">
           <button mat-button>
             <mat-icon color="primary">person</mat-icon>
@@ -24,6 +32,15 @@
             }
           </button>
         </div>
+        <div class="sidenav-item d-flex flex-row align-items-center py-1">
+          <button mat-button>
+            <mat-icon color="primary">workspaces</mat-icon>
+            @if (showFiller) {
+              <span class="ms-2 user-text">Classes</span>
+            }
+          </button>
+        </div>
+        
       </div>
       
 
@@ -49,7 +66,9 @@
             <span>Gestión de Alumnos</span>
         </mat-toolbar>
         <!--End Toolbar-->
-        <app-users />
+        <main>
+          <router-outlet />
+        </main>
     </div>
     <!--End Contenido-->
   
