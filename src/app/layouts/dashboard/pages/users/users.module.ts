@@ -8,12 +8,14 @@ import { UserDialogComponent } from './components/user-dialog/user-dialog.compon
 import { SharedModule } from '../../../../shared/shared.module';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    UserDetailComponent
   ],
   imports: [
     CommonModule,

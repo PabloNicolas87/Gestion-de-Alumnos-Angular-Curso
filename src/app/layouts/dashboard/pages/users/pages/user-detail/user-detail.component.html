@@ -1,0 +1,20 @@
+<div class="p-3">
+    <div *ngIf="loading" class="spinner d-flex justify-content-center align-items-center">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-container *ngIf="!loading">
+        <div *ngIf="user$ | async as user">
+            <h2>Detalles de Usuario ID: {{ user.id }}</h2>
+            <hr>
+            <p>Nombre: {{ user.firstname }}</p>
+            <p>Apellido: {{ user.lastname }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Fecha de Nacimiento: {{ user.birth | date }}</p>
+        </div>    
+    </ng-container>    
+</div>
+
+
+
+

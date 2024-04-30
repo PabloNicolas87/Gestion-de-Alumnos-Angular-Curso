@@ -27,5 +27,8 @@ export class UsersService {
   getUsers(): Observable<Usuario[]> {
     return of (USERS_DB).pipe(delay(1500))
   }
-
+  getUsersById(id: number): Observable<Usuario | undefined> {
+    const userId = parseInt(id.toString(), 10);
+    return of (USERS_DB.find((el) => el.id === userId)).pipe(delay(1500))
+  }
 }
