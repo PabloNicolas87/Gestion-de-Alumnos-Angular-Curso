@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../../../../core/models/index';
+import { Usuario } from '../../../../core/models/index-usuario';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 import { UsersService } from '../../../../core/services/user-service.service';

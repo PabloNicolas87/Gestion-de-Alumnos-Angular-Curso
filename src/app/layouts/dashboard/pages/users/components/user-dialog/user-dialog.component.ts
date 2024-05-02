@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Usuario } from '../../../../../../core/models/index';
+import { Usuario } from '../../../../../../core/models/index-usuario';
 
 @Component({
   selector: 'app-user-dialog',

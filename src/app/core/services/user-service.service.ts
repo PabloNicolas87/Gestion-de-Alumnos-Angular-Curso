@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
-import { Usuario } from '../models/index';
+import { Usuario } from '../models/index-usuario';
 
 const USERS_DB: Usuario[] = [
   {

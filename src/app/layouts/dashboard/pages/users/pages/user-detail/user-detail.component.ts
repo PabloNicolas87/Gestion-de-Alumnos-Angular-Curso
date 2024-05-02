@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { UsersService } from '../../../../../../core/services/user-service.service';
 import { Observable, of, Subscription } from 'rxjs';
-import { Usuario } from '../../../../../../core/models';
+import { Usuario } from '../../../../../../core/models/index-usuario';
 
 @Component({
   selector: 'app-user-detail',
