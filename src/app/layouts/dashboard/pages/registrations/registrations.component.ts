@@ -7,7 +7,6 @@ import { Curso } from '../../../../core/models/index-curso';
 import { UsersService } from '../../../../core/services/user-service.service';
 import { Usuario } from '../../../../core/models/index-usuario';
 import { InscripcionesFormulario } from '../../../../core/models/index-inscripciones-form';
-import { CreateInscripcionesData } from '../../../../core/models/index-inscripciones';
 
 @Component({
   selector: 'app-registrations',
@@ -15,9 +14,12 @@ import { CreateInscripcionesData } from '../../../../core/models/index-inscripci
   styleUrl: './registrations.component.scss'
 })
 export class RegistrationsComponent implements OnInit{
+  displayedColumns: string[] = ['id', 'user', 'course', 'actions'];
+
   registration: Inscripciones[] = [];
-  courses: Curso[] = [];
   users: Usuario[] = [];
+  courses: Curso[] = [];
+  
 
   isLoading = false;
 
@@ -40,10 +42,31 @@ export class RegistrationsComponent implements OnInit{
 
   createRegistration() {
     this.registrationService.createRegistration(this.registrationForm.getRawValue()).subscribe({
-      next: (reg) => {}
+      next: (regs) => {
+        regs.forEach(reg => {
+          const existingReg = this.registration.find(existing => existing.id === reg.id);
+          if (!existingReg) {
+            this.registration.push(reg);
+          }
+        });
+        this.registration = [...this.registration];
+      }
     });
   }
 
+  deleteRegistration(id: number) {
+    this.registrationService.deleteRegistration(id).subscribe({
+      next: () => {
+        this.registration = this.registration.filter(reg => reg.id !== id);
+      },
+      error: (err) => {
+        console.error('Error al eliminar registro:', err);
+      }
+      
+    });
+  }
+  
+  
   loadUsers() {
     this.usersService.getUsers().subscribe({
       next: (users) => {
@@ -65,7 +88,6 @@ export class RegistrationsComponent implements OnInit{
       }
     });
   }
-  
 
   loadRegistrations() {
     this.isLoading = true;

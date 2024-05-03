@@ -3,11 +3,13 @@ import { Usuario } from "./index-usuario";
 
 export interface Inscripciones {
     id: number;
-    curso: Curso;
     usuario: Usuario;
+    curso: Curso;
+    
 }
 
 export interface CreateInscripcionesData {
-    curso: Curso | null;
     usuario: Usuario | null;
+    curso: Curso | null;
+    
 }

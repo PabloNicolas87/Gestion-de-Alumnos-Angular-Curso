@@ -6,18 +6,18 @@ import { CreateInscripcionesData } from '../models/index-inscripciones';
 let INSCRIPCIONES_DB = [
   {
     id: 1,
-    curso: {
-      id: 2,
-      name: 'Curso de TypeScript',
-      schedule: '9:00',
-      shift: 'Mañana',
-    },
     usuario: {
       id: 1,
       firstname: 'user1',
       lastname: 'apellidouser1',
       birth: new Date('12/9/1978'),
       email: 'user1@user1.com',
+    },
+    curso: {
+      id: 2,
+      name: 'Curso de TypeScript',
+      schedule: '9:00',
+      shift: 'Mañana',
     }
   }
 ]
@@ -33,12 +33,14 @@ export class RegistrationService {
   createRegistration(data: CreateInscripcionesData) {
 
     if (data.curso && data.usuario) {
+      const newId = this.generateNewId();
       const newRegistration: Inscripciones = {
-        curso: data.curso,
+        id: newId,
         usuario: data.usuario,
-        id: new Date().getTime(),
+        curso: data.curso,
+        
       }
-      INSCRIPCIONES_DB.push(newRegistration)
+      INSCRIPCIONES_DB.push(newRegistration);
     }
     return of (INSCRIPCIONES_DB);
   }
@@ -51,5 +53,9 @@ export class RegistrationService {
     return of (
       INSCRIPCIONES_DB.map((registration) => (registration.id === id ? {...registration, ...data} : registration))
     );
+  }
+  private generateNewId(): number {
+    const maxId = Math.max(...INSCRIPCIONES_DB.map(registration => registration.id), 0);
+    return maxId + 1;
   }
 }
