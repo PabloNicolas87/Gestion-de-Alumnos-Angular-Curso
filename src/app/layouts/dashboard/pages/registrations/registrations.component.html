@@ -1,1 +1,23 @@
-<p>registrations works!</p>
+<div *ngIf="isLoading" class="spinner d-flex justify-content-center align-items-center">
+    <mat-spinner></mat-spinner>
+</div>
+
+<ng-container *ngIf="!isLoading">
+    <form [formGroup]="registrationForm" action="">
+        <mat-form-field>
+            <mat-label>Curso</mat-label>
+            <mat-select formControlName="curso">
+                <mat-option [value]="course" *ngFor="let course of courses">{{ course.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Usuario</mat-label>
+            <mat-select formControlName="usuario">
+                <mat-option [value]="user" *ngFor="let user of users">{{ user.firstname }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button (click)="createRegistration()" mat-button>Crear Inscripción</button>
+    </form>
+    <pre> {{ registration | json }}</pre>    
+</ng-container>
+
