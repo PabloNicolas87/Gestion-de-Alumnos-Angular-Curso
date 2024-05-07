@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardModule } from './layouts/dashboard/dashboard.module';
 import Swal from 'sweetalert2'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import Swal from 'sweetalert2'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    DashboardModule
+    DashboardModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync('noop')

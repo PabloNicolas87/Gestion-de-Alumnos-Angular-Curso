@@ -22,7 +22,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
+    console.log(this.loading);
     const userIdParam = parseInt(this.activatedRoute.snapshot.params['idUsuario']);
     this.subscription = this.usersService.getUsersById(userIdParam)
       .subscribe({

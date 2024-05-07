@@ -13,8 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { TituloGrandeDirective } from './directives/titulo-grande.directive';
-
-
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -39,6 +38,7 @@ import { TituloGrandeDirective } from './directives/titulo-grande.directive';
     MatStepperModule,
     MatDatepickerModule, 
     MatMomentDateModule,
+    MatCardModule,
     FullNamePipe,
     TituloGrandeDirective
   ]

@@ -33,6 +33,12 @@
               <span class="ms-2 user-text">Inscripciones</span>
             }
           </a>
+          <a (click)="logout()" mat-list-item class="d-flex flex-row align-items-center py-1">
+            <mat-icon color="primary">logout</mat-icon>
+            @if (showFiller) {
+              <span class="ms-2 user-text">Cerrar Sesión</span>
+            }
+          </a>
         </mat-nav-list>
       </div>
       

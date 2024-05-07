@@ -1,5 +1,33 @@
-<main class="d-flex justify-content-center align-items-center">
-    <button (click)="login()" color="primary" mat-flat-button>
-        Iniciar Sesión
-    </button>
+<main class="d-flex justify-content-center align-items-center h-100 flex-column">
+    <mat-card class="my-2">
+        <mat-card-header class="py-3">
+            <mat-card-title>
+                Iniciar Sesión
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="py-3 d-flex flex-column justify-content-center">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div>
+                    <mat-form-field class="w-100">
+                        <mat-label>E-mail</mat-label>
+                        <input formControlName="email" matInput />
+                    </mat-form-field>    
+                </div>
+                <div>
+                    <mat-form-field class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input formControlName="password" matInput />
+                    </mat-form-field>    
+                </div>
+                <button class="my-3 m-auto" type="submit" color="primary" mat-flat-button>
+                    Iniciar Sesión
+                </button>      
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="p-3 my-2">
+        <p>usuario1&#64;mail.com</p>
+        <br>
+        <p>123456</p>
+    </mat-card>
 </main>

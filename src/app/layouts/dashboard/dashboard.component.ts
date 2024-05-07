@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../core/services/auth-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,4 +11,11 @@ export class DashboardComponent {
   isMobile(): boolean {
     return window.innerWidth <= 580;
   }
+
+  constructor(private authService: AuthService) { }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
 }

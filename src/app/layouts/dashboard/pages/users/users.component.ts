@@ -56,9 +56,12 @@ export class UsersComponent implements OnInit {
             }
           });
         } else {
-          resultado.id = this.users.length + 1;
-          resultado.createdat = new Date();
-          this.users = [...this.users, resultado];
+          this.userService.createUsers(resultado).subscribe({
+            next: (userCreated) => {
+              this.users = [...this.users, userCreated]
+            }
+          });
+
           Swal.fire({
             icon: 'success',
             title: 'Usuario creado',

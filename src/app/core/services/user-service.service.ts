@@ -1,34 +1,26 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
-import { Usuario } from '../models/index-usuario';
+import { CreateUserPayload, Usuario } from '../models/index-usuario';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
-const USERS_DB: Usuario[] = [
-  {
-    id: 1,
-    firstname: 'Pablo',
-    lastname: 'Girone',
-    email: 'pablo1@gmail.com',
-    birth: new Date('12/8/1988')
-  },
-  {
-    id: 2,
-    firstname: 'Nicolás',
-    lastname: 'Girone',
-    email: 'nicolas1@gmail.com',
-    birth: new Date('02/12/1998')
-  },
-]
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
+  constructor(private httpClient: HttpClient) {}
+
   getUsers(): Observable<Usuario[]> {
-    return of (USERS_DB).pipe(delay(1500))
+    return this.httpClient.get<Usuario[]>(environment.baseAPIURL + '/users')
   }
   getUsersById(id: number): Observable<Usuario | undefined> {
-    const userId = parseInt(id.toString(), 10);
-    return of (USERS_DB.find((el) => el.id === userId)).pipe(delay(1500))
+    return this.httpClient.get<Usuario>(environment.baseAPIURL + '/users/' + id)
   }
+
+  createUsers(payload: CreateUserPayload): Observable<Usuario> {
+    return this.httpClient.post<Usuario>(environment.baseAPIURL + '/users/', payload)
+  }
+  
 }
