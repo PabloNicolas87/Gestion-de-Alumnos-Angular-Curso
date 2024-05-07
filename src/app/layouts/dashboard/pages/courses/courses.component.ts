@@ -32,14 +32,25 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  openDialog(editinCourses?: Curso): void {
+  loadCourses(): void {
+    this.coursesService.getCourses().subscribe({
+      next: (courses) => {
+        this.courses = courses;
+      },
+      error: (err) => {},
+      complete: () => {
+      }
+    });
+  }
+
+  openDialog(editingCourses?: Curso): void {
     const dialogRef = this.matDialog.open(CourseDialogComponent, {
-      data: editinCourses,
+      data: editingCourses,
     });
   
     dialogRef.afterClosed().subscribe((resultado) => {
       if (resultado) {
-        if (editinCourses) {
+        if (editingCourses) {
           Swal.fire({
             title: "Deseas guardar los cambios?",
             showDenyButton: true,
@@ -48,16 +59,24 @@ export class CoursesComponent implements OnInit {
             denyButtonText: `No Guardar`
           }).then((result) => {
             if (result.isConfirmed) {
-              this.courses = this.courses.map((u) => u.id === editinCourses.id ? { ...u, ...resultado } : u);
-              Swal.fire("Cambios guardados!", "", "success");
+              this.coursesService.updateCourses(editingCourses.id, resultado).subscribe(updatedCourses => {
+                const index = this.courses.findIndex(c => c.id === updatedCourses.id);
+                if (index !== -1) {
+                  this.courses[index] = updatedCourses;
+                  this.loadCourses();
+                  Swal.fire("Usuario actualizado!", "", "success");
+                }
+              });
             } else if (result.isDenied) {
               Swal.fire("Los cambios no fueron guardados", "", "info");
             }
           });
         } else {
-          resultado.id = this.courses.length + 1;
-          resultado.createdat = new Date();
-          this.courses = [...this.courses, resultado];
+          this.coursesService.createCourses(resultado).subscribe({
+            next: (courseCreated) => {
+              this.courses = [...this.courses, courseCreated]
+            }
+          });
           Swal.fire({
             icon: 'success',
             title: 'Curso creado',
@@ -82,12 +101,19 @@ export class CoursesComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.courses = this.courses.filter(course => course.id !== id);
-        Swal.fire(
-          'Curso borrado',
-          'El curso ha sido borrado exitosamente.',
-          'success'
-        );
+        this.coursesService.deleteCourses(id).subscribe({
+          next: () => {
+            this.courses = this.courses.filter(course => course.id !== id);
+            Swal.fire(
+              'Curso borrado',
+              'El curso ha sido borrado exitosamente.',
+              'success'
+            );
+          },
+          error: (err) => {
+            console.error('Error deleting course:', err);
+          }
+        });
       }
     });
   }

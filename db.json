@@ -1,27 +1,39 @@
 {
   "users": [
     {
-      "id": "1",
-      "firstname": "Pablo",
+      "firstname": "Pablosssss999",
       "lastname": "Girone",
       "email": "pablo1@gmail.com",
-      "birth": "1988-12-08"
+      "birth": "1988-06-10T03:00:00.000Z",
+      "id": "0728"
     },
     {
-      "id": "2",
-      "firstname": "Nicolás",
-      "lastname": "Girone",
-      "email": "nicolas1@gmail.com",
-      "birth": "1998-02-12"
-    },
-    {
-      "id": "8a79",
-      "firstname": "asas",
-      "lastname": "asas",
-      "email": "asas@wsdsdf",
-      "birth": "2016-01-18T02:00:00.000Z"
+      "id": "55ac",
+      "firstname": "dsfdsf",
+      "lastname": "sdfdsf",
+      "email": "sdfsad@sadas.com",
+      "birth": "2002-10-30T03:00:00.000Z"
     }
   ],
-  "courses": [],
+  "courses": [
+    {
+      "name": "Curso de TypeScriptwwwww",
+      "schedule": "9:00",
+      "shift": "Mañana",
+      "id": "2"
+    },
+    {
+      "name": "Curso de TypeScript",
+      "schedule": "9:00",
+      "shift": "Mañana",
+      "id": "9d8f"
+    },
+    {
+      "id": "7ebc",
+      "name": "Curso de Angular",
+      "schedule": "11:00",
+      "shift": "Tarde"
+    }
+  ],
   "registrations": []
 }

@@ -33,6 +33,17 @@ export class UsersComponent implements OnInit {
     })
   }
 
+  loadUsers(): void {
+    this.userService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+      },
+      error: (err) => {},
+      complete: () => {
+      }
+    });
+  }
+
   openDialog(editingUser?: Usuario): void {
     const dialogRef = this.matDialog.open(UserDialogComponent, {
       data: editingUser,
@@ -42,20 +53,27 @@ export class UsersComponent implements OnInit {
       if (resultado) {
         if (editingUser) {
           Swal.fire({
-            title: "Deseas guardar los cambios?",
+            title: "¿Deseas guardar los cambios?",
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: "Guardar",
-            denyButtonText: `No Guardar`
+            denyButtonText: "No Guardar"
           }).then((result) => {
             if (result.isConfirmed) {
-              this.users = this.users.map((u) => u.id === editingUser.id ? { ...u, ...resultado } : u);
-              Swal.fire("Cambios guardados!", "", "success");
+              this.userService.updateUser(editingUser.id, resultado).subscribe(updatedUser => {
+                const index = this.users.findIndex(u => u.id === updatedUser.id);
+                if (index !== -1) {
+                  this.users[index] = updatedUser;
+                  this.loadUsers();
+                  Swal.fire("Usuario actualizado!", "", "success");
+                }
+              });
             } else if (result.isDenied) {
               Swal.fire("Los cambios no fueron guardados", "", "info");
             }
           });
-        } else {
+        }
+         else {
           this.userService.createUsers(resultado).subscribe({
             next: (userCreated) => {
               this.users = [...this.users, userCreated]
@@ -81,14 +99,14 @@ onDeleteUser(id: number): void {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Si, borrar usuario!'
+    confirmButtonText: 'Si, borrar usuario!',
+    cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
-      this.users = this.users.filter((u) => u.id != id);
-      Swal.fire(
-        'El usuario ha sido borrado.',
-        'success'
-      );
+      this.userService.deleteUser(id).subscribe(() => {
+        this.users = this.users.filter(u => u.id !== id);
+        Swal.fire('Usuario borrado', 'El usuario ha sido borrado exitosamente.', 'success');
+      });
     }
   });
 }
