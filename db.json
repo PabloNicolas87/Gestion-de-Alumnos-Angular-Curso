@@ -35,5 +35,38 @@
       "shift": "Tarde"
     }
   ],
-  "registrations": []
+  "registrations": [
+    {
+      "id": "0014",
+      "usuario": {
+        "firstname": "Pablosssss999",
+        "lastname": "Girone",
+        "email": "pablo1@gmail.com",
+        "birth": "1988-06-10T03:00:00.000Z",
+        "id": "0728"
+      },
+      "curso": {
+        "name": "Curso de TypeScript",
+        "schedule": "9:00",
+        "shift": "Mañana",
+        "id": "9d8f"
+      }
+    },
+    {
+      "id": "b8d4",
+      "usuario": {
+        "id": "55ac",
+        "firstname": "dsfdsf",
+        "lastname": "sdfdsf",
+        "email": "sdfsad@sadas.com",
+        "birth": "2002-10-30T03:00:00.000Z"
+      },
+      "curso": {
+        "name": "Curso de TypeScriptwwwww",
+        "schedule": "9:00",
+        "shift": "Mañana",
+        "id": "2"
+      }
+    }
+  ]
 }

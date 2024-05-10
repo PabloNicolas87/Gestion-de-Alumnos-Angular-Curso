@@ -7,6 +7,8 @@ import { Curso } from '../../../../core/models/index-curso';
 import { UsersService } from '../../../../core/services/user-service.service';
 import { Usuario } from '../../../../core/models/index-usuario';
 import { InscripcionesFormulario } from '../../../../core/models/index-inscripciones-form';
+import { CreateInscripcionesData } from '../../../../core/models/index-inscripciones';
+
 
 @Component({
   selector: 'app-registrations',
@@ -41,18 +43,35 @@ export class RegistrationsComponent implements OnInit{
   }
 
   createRegistration() {
-    this.registrationService.createRegistration(this.registrationForm.getRawValue()).subscribe({
-      next: (regs) => {
-        regs.forEach(reg => {
+    const usuario = this.registrationForm.get('usuario')?.value;
+    const curso = this.registrationForm.get('curso')?.value;
+  
+    if (usuario && curso) {
+      const data: CreateInscripcionesData = {
+        usuario: usuario,
+        curso: curso
+      };
+  
+      this.registrationService.createRegistration(data).subscribe({
+        next: (reg) => {
           const existingReg = this.registration.find(existing => existing.id === reg.id);
           if (!existingReg) {
             this.registration.push(reg);
+            this.registration = [...this.registration];
           }
-        });
-        this.registration = [...this.registration];
-      }
-    });
+        },
+        error: (err) => {
+          console.error('Error al crear registro:', err);
+        }
+      });
+    } else {
+      console.error('Usuario o curso no definido');
+    }
   }
+  
+  
+  
+  
 
   deleteRegistration(id: number) {
     this.registrationService.deleteRegistration(id).subscribe({
@@ -89,7 +108,7 @@ export class RegistrationsComponent implements OnInit{
     });
   }
 
-  loadRegistrations() {
+  loadRegistrations(): void {
     this.isLoading = true;
     this.registrationService.getRegistration().subscribe({
       next: (registration) => {
