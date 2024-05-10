@@ -50,6 +50,7 @@ export class UsersComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe((resultado) => {
+      console.log(resultado);
       if (resultado) {
         if (editingUser) {
           Swal.fire({

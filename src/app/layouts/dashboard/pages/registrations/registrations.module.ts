@@ -5,11 +5,14 @@ import { RegistrationsRoutingModule } from './registrations-routing.module';
 import { RegistrationsComponent } from './registrations.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedModule } from '../../../../shared/shared.module';
+import { RegistrationDialogComponent } from './components/registration-dialog/registration-dialog.component';
+
 
 
 @NgModule({
   declarations: [
-    RegistrationsComponent
+    RegistrationsComponent,
+    RegistrationDialogComponent
   ],
   imports: [
     CommonModule,

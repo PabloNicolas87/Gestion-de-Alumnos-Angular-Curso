@@ -22,7 +22,8 @@ export class RegistrationService {
     return this.httpClient.delete<void>(`${environment.baseAPIURL}/registrations/${id}`);
   }
 
-  updateRegistration(id: number, data: Inscripciones): Observable<Inscripciones[]> {
-    return this.httpClient.put<Inscripciones[]>(`${environment.baseAPIURL}/registrations/${id}`, data);
-  }
+  updateRegistration(id: number, data: any): Observable<Inscripciones> {
+    return this.httpClient.put<Inscripciones>(`${environment.baseAPIURL}/registrations/${id}`, data);
+  }  
+  
 }

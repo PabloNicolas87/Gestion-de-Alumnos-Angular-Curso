@@ -1,0 +1,44 @@
+<form [formGroup]="formGroup" action="">
+    <mat-dialog-actions class="d-flex justify-content-end">
+        <button type="button" mat-icon-button mat-dialog-close color="warn">
+          <mat-icon>cancel</mat-icon>
+        </button>
+    </mat-dialog-actions>
+    <mat-vertical-stepper linear>
+        <mat-step>
+            <ng-template matStepLabel>Usuario y Curso</ng-template>
+            <div class="row py-2">
+                <div class="col-12 py-2">
+                    <mat-form-field class="px-2">
+                        <mat-label>Usuario</mat-label>
+                        <mat-select formControlName="usuario">
+                            <mat-option [value]="user" *ngFor="let user of users">{{ user | fullName }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row py-2">
+                <div class="col-12 py-2">
+                    <mat-form-field class="px-2">
+                        <mat-label>Curso</mat-label>
+                        <mat-select formControlName="curso">
+                            <mat-option [value]="course" *ngFor="let course of courses">{{ course.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field> 
+                </div>
+            </div>
+
+            <div>
+            <button type="button" mat-button matStepperNext [disabled]="formGroup.get('usuario')?.invalid || formGroup.get('curso')?.invalid">Siguiente</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Confirmar</ng-template>
+            <p>Por favor, revisa la información antes de guardar.</p>
+            <div>
+                <button type="button" mat-button matStepperPrevious>Anterior</button>
+                <button type="button" mat-button (click)="onSubmit()" [disabled]="formGroup.invalid">Guardar</button>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</form>

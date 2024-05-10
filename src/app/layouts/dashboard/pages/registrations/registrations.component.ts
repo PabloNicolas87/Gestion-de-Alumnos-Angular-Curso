@@ -1,39 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
+import { RegistrationDialogComponent } from '../registrations/components/registration-dialog/registration-dialog.component';
 import { RegistrationService } from '../../../../core/services/registration-service.service';
 import { Inscripciones } from '../../../../core/models/index-inscripciones';
-import { FormControl, FormGroup } from '@angular/forms';
 import { CoursesService } from '../../../../core/services/course-service.service';
-import { Curso } from '../../../../core/models/index-curso';
 import { UsersService } from '../../../../core/services/user-service.service';
 import { Usuario } from '../../../../core/models/index-usuario';
-import { InscripcionesFormulario } from '../../../../core/models/index-inscripciones-form';
-import { CreateInscripcionesData } from '../../../../core/models/index-inscripciones';
-
+import { Curso } from '../../../../core/models/index-curso';
 
 @Component({
   selector: 'app-registrations',
   templateUrl: './registrations.component.html',
-  styleUrl: './registrations.component.scss'
+  styleUrls: ['./registrations.component.scss']
 })
-export class RegistrationsComponent implements OnInit{
+export class RegistrationsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'user', 'course', 'actions'];
-
   registration: Inscripciones[] = [];
   users: Usuario[] = [];
   courses: Curso[] = [];
-  
-
   isLoading = false;
 
-  registrationForm = new FormGroup<InscripcionesFormulario>({
-    usuario: new FormControl(null),
-    curso: new FormControl(null),
-  })
-
   constructor(
-    private registrationService: RegistrationService, 
+    private registrationService: RegistrationService,
     private coursesService: CoursesService,
     private usersService: UsersService,
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -42,69 +34,76 @@ export class RegistrationsComponent implements OnInit{
     this.loadUsers();
   }
 
-  createRegistration() {
-    const usuario = this.registrationForm.get('usuario')?.value;
-    const curso = this.registrationForm.get('curso')?.value;
-  
-    if (usuario && curso) {
-      const data: CreateInscripcionesData = {
-        usuario: usuario,
-        curso: curso
-      };
-  
-      this.registrationService.createRegistration(data).subscribe({
-        next: (reg) => {
-          const existingReg = this.registration.find(existing => existing.id === reg.id);
-          if (!existingReg) {
-            this.registration.push(reg);
-            this.registration = [...this.registration];
-          }
-        },
-        error: (err) => {
-          console.error('Error al crear registro:', err);
-        }
-      });
-    } else {
-      console.error('Usuario o curso no definido');
-    }
-  }
-  
-  
-  
-  
+  openDialog(editingReg?: Inscripciones): void {
+    const dialogRef = this.matDialog.open(RegistrationDialogComponent, {
+      data: {
+        editingReg: editingReg,
+        users: this.users,
+        courses: this.courses
+      }
+    });
 
-  deleteRegistration(id: number) {
+    dialogRef.afterClosed().subscribe((resultado) => {
+      if (resultado) {
+        if (editingReg) {
+          Swal.fire({
+            title: '¿Deseas guardar los cambios?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Guardar',
+            denyButtonText: 'No Guardar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.registrationService.updateRegistration(editingReg.id, resultado as Inscripciones).subscribe(updatedReg => {
+                const index = this.registration.findIndex(reg => reg.id === editingReg.id);
+                if (index !== -1) {
+                  this.loadRegistrations();
+                  Swal.fire('¡Usuario actualizado!', '', 'success');
+                }
+              });
+            } else if (result.isDenied) {
+              Swal.fire('Los cambios no fueron guardados', '', 'info');
+            }
+          });
+        } else {
+          this.registrationService.createRegistration(resultado).subscribe(newReg => {
+            this.registration.push(newReg);
+            this.loadRegistrations();
+            Swal.fire({
+              icon: 'success',
+              title: 'Curso creado',
+              text: 'El curso ha sido creado exitosamente.'
+            });
+          });
+        }
+      }
+    });
+  }
+
+  deleteRegistration(id: number): void {
     this.registrationService.deleteRegistration(id).subscribe({
       next: () => {
         this.registration = this.registration.filter(reg => reg.id !== id);
       },
-      error: (err) => {
-        console.error('Error al eliminar registro:', err);
-      }
-      
+      error: (err) => {}
     });
   }
-  
-  
-  loadUsers() {
+
+  loadUsers(): void {
     this.usersService.getUsers().subscribe({
       next: (users) => {
         this.users = users;
       },
-      error: (err) => {},
-      complete: () => {
-      }
+      error: (err) => {}
     });
   }
-
-  loadCourses() {
+  
+  loadCourses(): void {
     this.coursesService.getCourses().subscribe({
       next: (courses) => {
         this.courses = courses;
       },
-      error: (err) => {},
-      complete: () => {
-      }
+      error: (err) => {}
     });
   }
 
@@ -118,6 +117,7 @@ export class RegistrationsComponent implements OnInit{
       complete: () => {
         this.isLoading = false;
       }
-    })
+    });
   }
+  
 }
