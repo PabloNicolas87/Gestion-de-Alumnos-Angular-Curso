@@ -23,11 +23,18 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this.loading);
-    const userIdParam = parseInt(this.activatedRoute.snapshot.params['idUsuario']);
+    const userIdParam = (this.activatedRoute.snapshot.params['idUsuario']);
     this.subscription = this.usersService.getUsersById(userIdParam)
       .subscribe({
         next: (user) => {
-          this.user$ = of(user);
+          if (user) {
+            this.user$ = of(user);
+          } else {
+            console.error('El usuario no existe');
+          }
+        },
+        error: (err) => {
+          console.error('Error al obtener el usuario:', err);
         },
         complete: () => {
           this.loading = false;
@@ -35,6 +42,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         }
       });
   }
+  
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
