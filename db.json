@@ -129,6 +129,22 @@
         "schedule": "20:00",
         "shift": "Noche"
       }
+    },
+    {
+      "id": "7e17",
+      "usuario": {
+        "id": "601e",
+        "firstname": "Martin",
+        "lastname": "Gonzalez",
+        "email": "martin@mail.com",
+        "birth": "2005-07-22T03:00:00.000Z"
+      },
+      "curso": {
+        "id": "4d21",
+        "name": "Curso de Vue JS",
+        "schedule": "11:00",
+        "shift": "Mañana"
+      }
     }
   ]
 }

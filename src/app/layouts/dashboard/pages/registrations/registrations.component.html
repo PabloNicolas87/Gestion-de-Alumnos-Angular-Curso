@@ -38,8 +38,7 @@
         <ng-container matColumnDef="user">
             <th mat-header-cell *matHeaderCellDef>Usuario</th>
             <td mat-cell *matCellDef="let reg">
-            <p>{{ reg.usuario.firstname }}</p>
-            <p>{{ reg.usuario.lastname }}</p>
+            <p>{{ reg.usuario | fullName }}</p>
             <p>{{ reg.usuario.birth | date }}</p>
             <p>{{ reg.usuario.email }}</p>
             </td>
