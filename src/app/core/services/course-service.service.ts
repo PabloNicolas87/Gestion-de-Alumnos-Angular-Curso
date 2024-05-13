@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { CreateCoursePayload, Curso } from '../models/index-curso';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';

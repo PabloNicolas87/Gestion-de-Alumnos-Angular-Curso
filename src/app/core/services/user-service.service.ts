@@ -24,8 +24,8 @@ export class UsersService {
     return this.httpClient.post<Usuario>(environment.baseAPIURL + '/users/', payload)
   }
 
-  deleteUser(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${environment.baseAPIURL}/users/${id}`);
+  deleteUser(id: number): Observable<null> {
+    return this.httpClient.delete<null>(`${environment.baseAPIURL}/users/${id}`);
   }
 
   updateUser(id: number, payload: any): Observable<Usuario> {

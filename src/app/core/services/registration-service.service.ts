@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Inscripciones, CreateInscripcionesData } from '../models/index-inscripciones';
@@ -11,7 +11,7 @@ export class RegistrationService {
   constructor(private httpClient: HttpClient) {}
 
   getRegistration(): Observable<Inscripciones[]> {
-    return this.httpClient.get<Inscripciones[]>(`${environment.baseAPIURL}/registrations`);
+    return this.httpClient.get<Inscripciones[]>(`${environment.baseAPIURL}/registrations`).pipe(delay(1500));
   }
 
   createRegistration(data: CreateInscripcionesData): Observable<Inscripciones> {

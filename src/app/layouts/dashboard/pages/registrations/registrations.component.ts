@@ -81,11 +81,28 @@ export class RegistrationsComponent implements OnInit {
   }
 
   deleteRegistration(id: number): void {
-    this.registrationService.deleteRegistration(id).subscribe({
-      next: () => {
-        this.registration = this.registration.filter(reg => reg.id !== id);
-      },
-      error: (err) => {}
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.registrationService.deleteRegistration(id).subscribe({
+          next: () => {
+            this.registration = this.registration.filter(reg => reg.id !== id);
+            Swal.fire('¡Borrado!', 'La inscripción ha sido eliminada.', 'success');
+          },
+          error: (err) => {
+            console.error('Error al borrar la inscripción:', err);
+            Swal.fire('Error', 'Ha ocurrido un error al intentar borrar la inscripción.', 'error');
+          }
+        });
+      }
     });
   }
 
