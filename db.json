@@ -43,7 +43,7 @@
       "birth": "2002-06-19T03:00:00.000Z"
     },
     {
-      "firstname": "Rociooooo",
+      "firstname": "Rocio",
       "lastname": "Maliqueo",
       "email": "rocio@mail.com",
       "birth": "1995-03-06T03:00:00.000Z",
@@ -80,22 +80,30 @@
       "name": "Curso de Next JS",
       "schedule": "20:00",
       "shift": "Noche"
+    },
+    {
+      "id": "d715",
+      "name": "Curso de Angular",
+      "schedule": "21:00",
+      "shift": "Noche"
     }
   ],
   "registrations": [
     {
-      "id": "eccf",
       "usuario": {
-        "firstname": "user1",
-        "lastname": "apellidouser1",
-        "birth": "1988-06-10T03:00:00.000Z",
-        "email": "user1@user1.com"
+        "id": "455e",
+        "firstname": "Matias",
+        "lastname": "Rojas",
+        "email": "matias@mail.com",
+        "birth": "1981-08-20T03:00:00.000Z"
       },
       "curso": {
-        "name": "Curso de TypeScript",
+        "id": "6ebb",
+        "name": "Curso de React JS",
         "schedule": "9:00",
         "shift": "Mañana"
-      }
+      },
+      "id": "eccf"
     },
     {
       "id": "9002",
@@ -115,22 +123,6 @@
     },
     {
       "id": "886e",
-      "usuario": {
-        "firstname": "Jose",
-        "lastname": "Martinez",
-        "email": "juan@mail.com",
-        "birth": "1998-01-20T02:00:00.000Z",
-        "id": "2d51"
-      },
-      "curso": {
-        "id": "4d21",
-        "name": "Curso de Vue JS",
-        "schedule": "11:00",
-        "shift": "Mañana"
-      }
-    },
-    {
-      "id": "4ddb",
       "usuario": {
         "firstname": "Jose",
         "lastname": "Martinez",
