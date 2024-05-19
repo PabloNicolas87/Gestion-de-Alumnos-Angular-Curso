@@ -1,4 +1,4 @@
 export const environment = {
     isProd: true,
-    baseAPIURL: 'http://localhost:3000',
+    baseAPIURL: 'https://api-gestion-de-alumnos-json-server.vercel.app/',
 };
