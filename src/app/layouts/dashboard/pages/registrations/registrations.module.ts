@@ -6,6 +6,10 @@ import { RegistrationsComponent } from './registrations.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedModule } from '../../../../shared/shared.module';
 import { RegistrationDialogComponent } from './components/registration-dialog/registration-dialog.component';
+import { EffectsModule } from '@ngrx/effects';
+import { RegistrationEffects } from './store/registration.effects';
+import { StoreModule } from '@ngrx/store';
+import { registrationFeature } from './store/registration.reducer';
 
 
 
@@ -18,7 +22,9 @@ import { RegistrationDialogComponent } from './components/registration-dialog/re
     CommonModule,
     RegistrationsRoutingModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature(registrationFeature),
+    EffectsModule.forFeature([RegistrationEffects])
   ]
 })
 export class RegistrationsModule { }

@@ -1,9 +1,11 @@
 <main class="p-5">
-    <div *ngIf="isLoading" class="spinner d-flex justify-content-center align-items-center">
+    <div *ngIf="loadingRegistrations$ | async" class="spinner d-flex justify-content-center align-items-center">
         <mat-spinner></mat-spinner>
     </div>
 
-    <ng-container *ngIf="!isLoading">
+    <!--aqui quiero agregar un caso de error-->
+
+    <ng-container *ngIf="!(loadingRegistrations$ | async)">
         <div>
             <h2 tituloGrande>Lista de Inscripciones</h2>
         </div>

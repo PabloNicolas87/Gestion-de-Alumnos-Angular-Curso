@@ -103,38 +103,22 @@
         "schedule": "9:00",
         "shift": "Mañana"
       },
-      "id": "eccf"
+      "id": "60b1"
     },
     {
-      "id": "9002",
+      "id": "6f06",
       "usuario": {
-        "id": "36de",
-        "firstname": "Ignacio",
-        "lastname": "Ramirez",
-        "email": "ignacio@mail.com",
-        "birth": "2001-07-24T03:00:00.000Z"
+        "id": "10a5",
+        "firstname": "Carlos",
+        "lastname": "Muñoz",
+        "email": "Carlos@mail.com",
+        "birth": "1987-06-03T03:00:00.000Z"
       },
       "curso": {
         "id": "1a8e",
         "name": "Curso de Javascript",
         "schedule": "13:00",
         "shift": "Tarde"
-      }
-    },
-    {
-      "id": "886e",
-      "usuario": {
-        "firstname": "Jose",
-        "lastname": "Martinez",
-        "email": "juan@mail.com",
-        "birth": "1998-01-20T02:00:00.000Z",
-        "id": "2d51"
-      },
-      "curso": {
-        "id": "4d21",
-        "name": "Curso de Vue JS",
-        "schedule": "11:00",
-        "shift": "Mañana"
       }
     }
   ]

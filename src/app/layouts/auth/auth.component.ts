@@ -3,6 +3,9 @@ import { AuthService } from '../../core/services/auth-service.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { authActions } from '../../store/auth/auth.actions';
+import { Store } from '@ngrx/store';
+import { authUser } from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-auth',
@@ -14,24 +17,32 @@ export class AuthComponent implements OnDestroy, OnInit{
 
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder){
+  authUserSubscription?: Subscription;
+
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder, private store: Store ){
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authUserSubscription = this.store.select(authUser).subscribe({
+      next: (user) => {
+        if (user) this.router.navigate(['dashboard', 'home' ])
+      }
+    })
+  }
 
   ngOnDestroy(): void {
-    this.authUserCHangeSubs?.unsubscribe();
+    this.authUserSubscription?.unsubscribe();
   }
 
   login() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      this.authService.login(this.loginForm.getRawValue());  
+     this.store.dispatch(authActions.login({ payload: this.loginForm.getRawValue() }))
     }
   }
 }
