@@ -13,7 +13,6 @@ import { authUser } from '../../store/auth/auth.selectors';
   styleUrl: './auth.component.scss'
 })
 export class AuthComponent implements OnDestroy, OnInit{
-  authUserCHangeSubs?: Subscription;
 
   loginForm: FormGroup;
 

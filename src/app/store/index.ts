@@ -8,7 +8,7 @@ export const rootReducer: ActionReducerMap<RootState> = {
     [authFeatureName]: authReducer,
 }
 
-/*export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
     return localStorageSync({ keys: [authFeatureName], rehydrate:true })(reducer);
   }
-  export const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];*/
+  export const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
