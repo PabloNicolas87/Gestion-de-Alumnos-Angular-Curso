@@ -91,17 +91,17 @@
   "registrations": [
     {
       "usuario": {
-        "id": "455e",
-        "firstname": "Matias",
-        "lastname": "Rojas",
-        "email": "matias@mail.com",
-        "birth": "1981-08-20T03:00:00.000Z"
+        "id": "f71f",
+        "firstname": "Pablo",
+        "lastname": "Girone",
+        "email": "mail@mail.com",
+        "birth": "2002-06-19T03:00:00.000Z"
       },
       "curso": {
-        "id": "6ebb",
-        "name": "Curso de React JS",
-        "schedule": "9:00",
-        "shift": "Mañana"
+        "id": "1a8e",
+        "name": "Curso de Javascript",
+        "schedule": "13:00",
+        "shift": "Tarde"
       },
       "id": "60b1"
     },
@@ -119,6 +119,22 @@
         "name": "Curso de Javascript",
         "schedule": "13:00",
         "shift": "Tarde"
+      }
+    },
+    {
+      "id": "5478",
+      "usuario": {
+        "id": "455e",
+        "firstname": "Matias",
+        "lastname": "Rojas",
+        "email": "matias@mail.com",
+        "birth": "1981-08-20T03:00:00.000Z"
+      },
+      "curso": {
+        "id": "4d21",
+        "name": "Curso de Vue JS",
+        "schedule": "11:00",
+        "shift": "Mañana"
       }
     }
   ]
